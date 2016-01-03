@@ -5,7 +5,7 @@ This simple library provides downloading over Http. It supports Pause and Resume
 
 •	Get most useful properties of the download source such as ContentLength, Accept-Range..
 
-•	Easy to manage download processes with pausing, resuming and cancelling
+•	Due to event based programming, managing downloads is so easy
 
 •	Reports progress and speed every time when the progress is changed
 
@@ -26,3 +26,5 @@ myQueue.Add(targetUrl1,targetPath1);
 myQueue.Add(targetUrl2,targetPath2);
 myQueue.Start();
 </code></pre>
+
+
