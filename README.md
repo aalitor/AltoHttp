@@ -17,14 +17,23 @@ Downloading is so simple
 <code>
 HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
 downloader.Start(); 
+//PAUSE
+downloader.Pause();
+//RESUME
+downloader.Resume();
 </code>
 </pre>
+
 Queue using
 <pre><code>
 DownloadQueue myQueue = new DownloadQueue();
 myQueue.Add(targetUrl1,targetPath1);
 myQueue.Add(targetUrl2,targetPath2);
 myQueue.Start();
+//PAUSE
+myQueue.Pause();
+//RESUME
+myQueue.Resume();
 </code></pre>
 
 
