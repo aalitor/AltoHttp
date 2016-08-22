@@ -16,11 +16,11 @@ Downloading is so simple
 <pre>
 <code>
 HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
-downloader.Start(); 
+downloader.StartAsync(); 
 //PAUSE
 downloader.Pause();
 //RESUME
-downloader.Resume();
+downloader.ResumeAsync();
 </code>
 </pre>
 
@@ -29,11 +29,11 @@ Queue using
 DownloadQueue myQueue = new DownloadQueue();
 myQueue.Add(targetUrl1,targetPath1);
 myQueue.Add(targetUrl2,targetPath2);
-myQueue.Start();
+myQueue.StartAsync();
 //PAUSE
 myQueue.Pause();
 //RESUME
-myQueue.Resume();
+myQueue.ResumeAsync();
 </code></pre>
 
 
