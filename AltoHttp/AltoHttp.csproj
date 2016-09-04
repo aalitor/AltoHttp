@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1C5CBEC9-B57E-4EBA-BBC2-F6320F21CAE2}</ProjectGuid>
+    <ProjectGuid>{9EA97F12-9CB5-4E19-BAF4-6DFD3D287C51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AltoHttp</RootNamespace>
@@ -39,15 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DownloadProgressEventArgs.cs" />
-    <Compile Include="DownloadQueue.cs" />
-    <Compile Include="DownloadState.cs" />
-    <Compile Include="HttpDownloader.cs" />
-    <Compile Include="IDownloader.cs" />
-    <Compile Include="IQueue.cs" />
+    <Compile Include="Classes\DownloadProgressEventArgs.cs" />
+    <Compile Include="Classes\DownloadQueue.cs" />
+    <Compile Include="Classes\HttpDownloader.cs" />
+    <Compile Include="Classes\QueueElement.cs" />
+    <Compile Include="Classes\QueueElementCompletedEventArgs.cs" />
+    <Compile Include="Enums\DownloadState.cs" />
+    <Compile Include="Interfaces\IDownloader.cs" />
+    <Compile Include="Interfaces\IQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueElement.cs" />
-    <Compile Include="QueueElementCompletedEventArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
