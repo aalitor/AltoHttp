@@ -39,14 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\DownloadProgressEventArgs.cs" />
-    <Compile Include="Classes\DownloadQueue.cs" />
-    <Compile Include="Classes\HttpDownloader.cs" />
-    <Compile Include="Classes\QueueElement.cs" />
-    <Compile Include="Classes\QueueElementCompletedEventArgs.cs" />
-    <Compile Include="Enums\DownloadState.cs" />
-    <Compile Include="Interfaces\IDownloader.cs" />
-    <Compile Include="Interfaces\IQueue.cs" />
+    <Compile Include="AltoHttp\Classes\DownloadProgressEventArgs.cs" />
+    <Compile Include="AltoHttp\Classes\DownloadQueue.cs" />
+    <Compile Include="AltoHttp\Classes\HttpDownloader.cs" />
+    <Compile Include="AltoHttp\Classes\QueueElement.cs" />
+    <Compile Include="AltoHttp\Classes\QueueElementCompletedEventArgs.cs" />
+    <Compile Include="AltoHttp\Classes\SizeUnitConverter.cs" />
+    <Compile Include="AltoHttp\Enums\DownloadState.cs" />
+    <Compile Include="AltoHttp\Enums\FromTo.cs" />
+    <Compile Include="AltoHttp\Interfaces\IDownloader.cs" />
+    <Compile Include="AltoHttp\Interfaces\IQueue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

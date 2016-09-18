@@ -156,6 +156,7 @@ namespace AltoHttp
             try
             {
                 req = WebRequest.Create(this.FileURL) as HttpWebRequest;
+                req.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
                 req.AddRange(offset);
                 req.AllowAutoRedirect = true;
                 resp = req.GetResponse() as HttpWebResponse;
@@ -299,60 +300,6 @@ namespace AltoHttp
             return false;
         }
         #endregion
-
     }
-
-    public static class MemoryUnitConverter
-    {
-        public static string ConvertBestScaledSize(this long bytes)
-        {
-            int unit = 1024;
-            bool inBytes = bytes < unit;
-            bool inKb = bytes < unit * unit;
-            bool inMb = bytes < unit * unit * unit;
-            if (inBytes)
-            {
-                return bytes + " bytes";
-            }
-            if (inKb)
-            {
-                return (bytes / 1024d).ToString("0.00") + " kb";
-            }
-            if (inMb)
-            {
-                return (bytes / 1024d / 1024).ToString("0.00") + " mb";
-            }
-            return (bytes / 1024d / 1024 / 1024).ToString("0.00") + " gb";
-        }
-        public static double ConvertMemorySize(this long size, FromTo fromTo)
-        {
-            int degree = (int)fromTo;
-            if (degree < 0)
-            {
-                double divide = Math.Pow(1024, -degree);
-                return size / divide;
-            }
-            else
-            {
-                double multiplier = Math.Pow(1024, degree);
-                return size * multiplier;
-            }
-        }
-
-    }
-    public enum FromTo
-    {
-        BytesToKb = -1,
-        BytesToMb = -2,
-        BytesToGb = -3,
-        KbToBytes = 1,
-        KbToMb = -1,
-        KbToGb = -2,
-        MbToBytes = 2,
-        MbToKb = 1,
-        MbToGb = -1,
-        GbToBytes = 3,
-        GbToKb = 2,
-        GbToMb = 1
-    }
+    
 }
