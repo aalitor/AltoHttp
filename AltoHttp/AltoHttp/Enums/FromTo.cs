@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AltoHttp.Classes
 {
     public enum FromTo
     {
+        //Think the units like stair steps
         BytesToKb = -1,
         BytesToMb = -2,
         BytesToGb = -3,

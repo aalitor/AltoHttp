@@ -12,7 +12,7 @@ namespace AltoHttp
 
     public class HTTPDownloader : IDownloader
     {
-        #region Değişkenler
+        #region Variables
         /// <summary>
         /// Occurs when the download process is completed
         /// </summary>
@@ -43,7 +43,7 @@ namespace AltoHttp
         DownloadState state;
         #endregion
 
-        #region Özellikler
+        #region Properties
         /// <summary>
         /// Gets content size of the file
         /// </summary>
@@ -137,7 +137,7 @@ namespace AltoHttp
         }
         #endregion
 
-        #region Yapıcı Metot ve İndirme Prosedürü Metodu
+        #region Constructor, Destructor, Download Procedure
         public HTTPDownloader(string url, string destPath)
         {
             this.Reset();
@@ -152,7 +152,7 @@ namespace AltoHttp
         void Download(int offset, bool overWriteFile)
         {
 
-            #region İstek Gönder ve Cevap Al
+            #region Send Request, Get Response
             try
             {
                 req = WebRequest.Create(this.FileURL) as HttpWebRequest;
@@ -188,7 +188,8 @@ namespace AltoHttp
             byte[] buffer = new byte[4096];
             stpWatch.Start();
             AsyncOperation opsr = AsyncOperationManager.CreateOperation(null);
-            #region Veriyi Al ve Dosyaya Yaz
+
+            #region Get the data to the buffer, write it to the file
             while ((bytesRead = str.Read(buffer, 0, buffer.Length)) > 0)
             {
                 if (state == DownloadState.Cancelled | state == DownloadState.Paused) break;
@@ -214,7 +215,7 @@ namespace AltoHttp
 
         #endregion
 
-        #region Başlatma,Durdurma,Devam Ettirme, İptal Etme Metotları
+        #region Start, Pause, Stop, Resume
 
         public async void StartAsync()
         {
@@ -262,7 +263,7 @@ namespace AltoHttp
         }
         #endregion
 
-        #region Diğer Metotlar
+        #region Helper Methods
         void Reset()
         {
             progress = 0;
