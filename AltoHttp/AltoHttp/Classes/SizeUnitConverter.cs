@@ -2,7 +2,7 @@
 
 namespace AltoHttp.Classes
 {
-    public static class SizeUnitConverter
+    static class SizeUnitConverter
     {
         public static string ConvertBestScaledSize(this long bytes)
         {

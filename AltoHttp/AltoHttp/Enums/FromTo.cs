@@ -3,7 +3,7 @@ using System.Text;
 
 namespace AltoHttp.Classes
 {
-    public enum FromTo
+    enum FromTo
     {
         //Think the units like stair steps
         BytesToKb = -1,

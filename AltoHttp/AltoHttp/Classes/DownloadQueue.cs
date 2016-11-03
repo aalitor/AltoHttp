@@ -4,6 +4,11 @@ using System.Threading;
 
 namespace AltoHttp
 {
+    /// <summary>
+    /// Passes the QueueElementCompleted event args
+    /// </summary>
+    /// <param name="sender">The objects which the event is occured in</param>
+    /// <param name="e">Event arguments</param>
     public delegate void QueueElementCompletedEventHandler(object sender, QueueElementCompletedEventArgs e);
 
     /// <summary>
@@ -13,7 +18,7 @@ namespace AltoHttp
     {
         #region Variables
 
-        HTTPDownloader downloader;
+        HttpDownloader downloader;
         List<QueueElement> elements;
         QueueElement currentElement;
         int progress;
@@ -32,7 +37,9 @@ namespace AltoHttp
         /// Occurs when the queue element is completed
         /// </summary>
         public event QueueElementCompletedEventHandler QueueElementCompleted;
-
+        /// <summary>
+        /// Occurs when the queue has been started
+        /// </summary>
         public event EventHandler QueueElementStartedDownloading;
 
         #endregion
@@ -48,6 +55,9 @@ namespace AltoHttp
             downloadSpeed = 0;
             queuePaused = true;
         }
+        /// <summary>
+        /// Destructor for the object
+        /// </summary>
         ~DownloadQueue()
         {
             this.Cancel();
@@ -236,7 +246,7 @@ namespace AltoHttp
         {
             QueueElement elt = getFirstNotCompletedElement();
             if (string.IsNullOrEmpty(elt.Url)) return;
-            downloader = new HTTPDownloader(elt.Url, elt.Destination);
+            downloader = new HttpDownloader(elt.Url, elt.Destination);
             downloader.DownloadCompleted += downloader_DownloadCompleted;
             downloader.DownloadProgressChanged += downloader_DownloadProgressChanged;
             downloader.StartAsync();

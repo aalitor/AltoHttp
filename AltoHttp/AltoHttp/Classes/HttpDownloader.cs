@@ -8,9 +8,16 @@ using System.Threading.Tasks;
 
 namespace AltoHttp
 {
+    /// <summary>
+    /// ProgressChanged event handler
+    /// </summary>
+    /// <param name="sender">Sender object</param>
+    /// <param name="e">Event arguments</param>
     public delegate void ProgressChangedEventHandler(object sender, DownloadProgressChangedEventArgs e);
-
-    public class HTTPDownloader : IDownloader
+    /// <summary>
+    /// Contains method to help downloading
+    /// </summary>
+    public class HttpDownloader : IDownloader
     {
         #region Variables
         /// <summary>
@@ -138,14 +145,22 @@ namespace AltoHttp
         #endregion
 
         #region Constructor, Destructor, Download Procedure
-        public HTTPDownloader(string url, string destPath)
+        /// <summary>
+        /// Creates an instance of the HttpDownloader class
+        /// </summary>
+        /// <param name="url">Url source string</param>
+        /// <param name="destPath">Target file path</param>
+        public HttpDownloader(string url, string destPath)
         {
             this.Reset();
             fileURL = url;
             this.destPath = destPath;
             oprtor = AsyncOperationManager.CreateOperation(null);
         }
-        ~HTTPDownloader()
+        /// <summary>
+        /// Destructor of the class object
+        /// </summary>
+        ~HttpDownloader()
         {
             this.Cancel();
         }
@@ -216,7 +231,9 @@ namespace AltoHttp
         #endregion
 
         #region Start, Pause, Stop, Resume
-
+        /// <summary>
+        /// Starts the download async
+        /// </summary>
         public async void StartAsync()
         {
             if (state != DownloadState.Started & state != DownloadState.Completed & state != DownloadState.Cancelled)
@@ -229,7 +246,9 @@ namespace AltoHttp
             });
 
         }
-
+        /// <summary>
+        /// Pauses the download process
+        /// </summary>
         public void Pause()
         {
             if (!acceptRange)
@@ -237,7 +256,9 @@ namespace AltoHttp
             if (State == DownloadState.Downloading)
                 state = DownloadState.Paused;
         }
-
+        /// <summary>
+        /// Resumes the download, only if the download is paused
+        /// </summary>
         public void ResumeAsync()
         {
             if (State != DownloadState.Paused) return;
@@ -247,7 +268,9 @@ namespace AltoHttp
                 Download((int)bytesReceived, true);
             });
         }
-
+        /// <summary>
+        /// Cancels the download and deletes the uncompleted file which is saved to destination
+        /// </summary>
         public void Cancel()
         {
             if (state == DownloadState.Completed | state == DownloadState.Cancelled | state == DownloadState.ErrorOccured) return;
