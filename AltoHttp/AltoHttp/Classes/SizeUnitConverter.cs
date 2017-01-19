@@ -11,18 +11,13 @@ namespace AltoHttp.Classes
             bool inKb = bytes < unit * unit;
             bool inMb = bytes < unit * unit * unit;
             if (inBytes)
-            {
                 return bytes + " bytes";
-            }
             else if (inKb)
-            {
                 return (bytes / 1024d).ToString("0.00") + " kb";
-            }
             else if (inMb)
-            {
                 return (bytes / 1024d / 1024).ToString("0.00") + " mb";
-            }
-            else return (bytes / 1024d / 1024 / 1024).ToString("0.00") + " gb";
+            else 
+                return (bytes / 1024d / 1024 / 1024).ToString("0.00") + " gb";
         }
         public static double ConvertMemorySize(this long size, FromTo fromTo)
         {
