@@ -14,15 +14,15 @@ namespace AltoHttp.Classes
             {
                 return bytes + " bytes";
             }
-            if (inKb)
+            else if (inKb)
             {
                 return (bytes / 1024d).ToString("0.00") + " kb";
             }
-            if (inMb)
+            else if (inMb)
             {
                 return (bytes / 1024d / 1024).ToString("0.00") + " mb";
             }
-            return (bytes / 1024d / 1024 / 1024).ToString("0.00") + " gb";
+            else return (bytes / 1024d / 1024 / 1024).ToString("0.00") + " gb";
         }
         public static double ConvertMemorySize(this long size, FromTo fromTo)
         {
