@@ -11,6 +11,11 @@ This simple library provides downloading over Http. It supports Pause and Resume
 
 •	Create download queue with DownloadQueue and manage your download list
 
+<h2>Nuget</h2>
+<a href="https://www.nuget.org/packages/AltoHttp">Get AltoHttp at Nuget</a>
+<pre><code style="font-size:19px;"><b>Install-Package AltoHttp</b></code></pre>
+
+
 #Usage
 Downloading is so simple
 <pre>
