@@ -21,11 +21,11 @@ Downloading is so simple
 <pre>
 <code>
 HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
-downloader.StartAsync(); 
+downloader.Start(); 
 //PAUSE
 downloader.Pause();
 //RESUME
-downloader.ResumeAsync();
+downloader.Resume();
 </code>
 </pre>
 
@@ -40,5 +40,8 @@ myQueue.Pause();
 //RESUME
 myQueue.ResumeAsync();
 </code></pre>
+
+<h3>Demo Application</h3>
+<img src="http://i.imgur.com/PokHWEf.png" />
 
 
