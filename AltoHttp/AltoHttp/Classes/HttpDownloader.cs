@@ -39,14 +39,10 @@ namespace AltoHttp
         FileStream file;
         Stopwatch stpWatch;
         AsyncOperation oprtor;
-        int bytesReceived;
-        int progress;
-        int speed;
-        int speedBytes;
+        int bytesReceived, progress, speed, speedBytes;
         long contentLength;
         bool acceptRange;
-        string fileURL;
-        string destPath;
+        string fileURL, destPath;
         DownloadState state;
         #endregion
 
