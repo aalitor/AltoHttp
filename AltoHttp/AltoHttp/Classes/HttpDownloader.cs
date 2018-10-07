@@ -15,7 +15,7 @@ namespace AltoHttp
     /// <param name="e">Event arguments</param>
     public delegate void ProgressChangedEventHandler(object sender, DownloadProgressChangedEventArgs e);
     /// <summary>
-    /// Contains method to help downloading
+    /// Contains methods to help downloading
     /// </summary>
     public class HttpDownloader : IDownloader
     {
@@ -32,7 +32,10 @@ namespace AltoHttp
         /// Occurs when the download progress is changed
         /// </summary>
         public event ProgressChangedEventHandler DownloadProgressChanged;
-
+        /// <summary>
+        /// Fired when response headers received e.g ContentLegth, Resumeability
+        /// </summary>
+        public event EventHandler HeadersReceived;
         HttpWebRequest req;
         HttpWebResponse resp;
         Stream str;
@@ -95,6 +98,7 @@ namespace AltoHttp
                 return fileURL;
             }
         }
+
         /// <summary>
         /// Gets the destination path that the file will be saved when the download process is completed
         /// </summary>
@@ -176,6 +180,11 @@ namespace AltoHttp
                 {
                     contentLength = resp.ContentLength;
                     acceptRange = getAcceptRangeHeaderValue();
+                    if (HeadersReceived != null)
+                        oprtor.Post(new SendOrPostCallback(delegate
+                        {
+                            HeadersReceived(this, EventArgs.Empty);
+                        }), null);
                 }
             }
             catch (Exception)
@@ -197,9 +206,9 @@ namespace AltoHttp
             int bytesRead = 0;
             speedBytes = 0;
             byte[] buffer = new byte[4096];
+            stpWatch.Reset();
             stpWatch.Start();
-            AsyncOperation opsr = AsyncOperationManager.CreateOperation(null);
-
+            
             #region Get the data to the buffer, write it to the file
             while ((bytesRead = str.Read(buffer, 0, buffer.Length)) > 0)
             {
@@ -318,6 +327,10 @@ namespace AltoHttp
                     return resp.Headers[i].Contains("byte");
             }
             return false;
+        }
+        string getFileNameFromUrl()
+        {
+            return Path.GetFileName(new Uri(this.fileURL).AbsolutePath);
         }
         #endregion
     }
