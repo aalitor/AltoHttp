@@ -153,6 +153,17 @@ namespace AltoHttp
         {
             get { return downloader.AcceptRange; }
         }
+
+        /// <summary>
+        /// Gets the State of the current download
+        /// </summary>
+        public DownloadState State {
+            get
+            {
+                return downloader.State;
+            }
+        }
+
         #endregion
 
         #region Methods
