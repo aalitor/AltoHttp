@@ -8,17 +8,24 @@ namespace AltoHttp
     public class QueueElementCompletedEventArgs
     {
         int _index;
+        QueueElement _element;
         /// <summary>
         /// Contains QueueElementCompleted event args
         /// </summary>
         /// <param name="index"></param>
-        public QueueElementCompletedEventArgs(int index)
+        public QueueElementCompletedEventArgs(int index, QueueElement element)
         {
             _index = index;
+            _element = element;
         }
         /// <summary>
         /// The index of the completed element
         /// </summary>
         public int Index { get { return _index; } }
+
+        /// <summary>
+        /// The index of the completed element
+        /// </summary>
+        public QueueElement Element { get { return _element; } }
     }
 }

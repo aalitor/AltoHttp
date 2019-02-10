@@ -76,7 +76,7 @@ namespace AltoHttp
         void downloader_DownloadCompleted(object sender, EventArgs e)
         {
             if (QueueElementCompleted != null)
-                QueueElementCompleted(this, new QueueElementCompletedEventArgs(this.CurrentIndex));
+                QueueElementCompleted(this, new QueueElementCompletedEventArgs(this.CurrentIndex, currentElement));
             for (int i = 0; i < elements.Count; i++)
             {
                 if (elements[i].Equals(currentElement))
@@ -153,6 +153,18 @@ namespace AltoHttp
         {
             get { return downloader.AcceptRange; }
         }
+
+        /// <summary>
+        /// Gets the State of the current download
+        /// </summary>
+        public DownloadState State
+        {
+            get
+            {
+                return downloader.State;
+            }
+        }
+
         #endregion
 
         #region Methods
