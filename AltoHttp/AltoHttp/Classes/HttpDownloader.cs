@@ -171,7 +171,8 @@ namespace AltoHttp
             try
             {
                 req = WebRequest.Create(this.FileURL) as HttpWebRequest;
-                req.UserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
+                req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362";
+                req.ServicePoint.ConnectionLimit = 999;
                 req.AddRange(offset);
                 req.AllowAutoRedirect = true;
                 resp = req.GetResponse() as HttpWebResponse;
