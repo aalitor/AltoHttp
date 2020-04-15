@@ -1,18 +1,47 @@
 # AltoHttp
-AltoHttp provides fast and easy download management
+This simple library provides downloading over Http. It supports Pause and Resume in both for download and download queue
 
-Download is so easy with AltoHttp. It supports pause and resume (especially resuming from file even application closed) and queueing downloads.
-Reporting download is also so user friendly with event based programming. You can get the Status info in every step of a download progress.
-Event parameters contains speed and progress percentage.
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">HttpDownloader hd <span style="color: #333333">=</span> new HttpDownloader(url, savepath);
-hd<span style="color: #333333">.</span>Start();
-hd<span style="color: #333333">.</span>Pause();
-hd<span style="color: #333333">.</span>Resume(); <span style="color: #333333">//</span><span style="color: #000000; font-weight: bold">or</span> hd<span style="color: #333333">.</span>Resume(filetoResume);
-</pre></div>
+•	Download file with just one line of code
+
+•	Get most useful properties of the download source such as ContentLength, Accept-Range..
+
+•	Due to event based programming, managing downloads is so easy
+
+•	Reports progress and speed every time when the progress is changed
+
+•	Create download queue with DownloadQueue and manage your download list
+
+<h2>Nuget</h2>
+<a href="https://www.nuget.org/packages/AltoHttp">Get AltoHttp at Nuget</a>
+<pre><code style="font-size:19px;"><b>Install-Package AltoHttp</b></code></pre>
 
 
-<h2> What's next: </h2>
-<ul>
-<li>Adding header values and cookies</li>
-<li>Adding network credentials</li>
-</ul>
+#Usage
+Downloading is so simple
+<pre>
+<code>
+HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
+downloader.Start(); 
+//PAUSE
+downloader.Pause();
+//RESUME
+downloader.Resume();
+</code>
+</pre>
+
+Queue using
+<pre><code>
+DownloadQueue myQueue = new DownloadQueue();
+myQueue.Add(targetUrl1,targetPath1);
+myQueue.Add(targetUrl2,targetPath2);
+myQueue.StartAsync();
+//PAUSE
+myQueue.Pause();
+//RESUME
+myQueue.ResumeAsync();
+</code></pre>
+
+<h3>Demo Application</h3>
+<img src="http://i.imgur.com/PokHWEf.png" />
+
+
