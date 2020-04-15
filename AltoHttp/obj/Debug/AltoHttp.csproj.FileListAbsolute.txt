@@ -1,0 +1,8 @@
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.exe.config
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.exe
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.pdb
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.csprojResolveAssemblyReference.cache
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.exe
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.pdb
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.MainForm.resources
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.csproj.GenerateResource.Cache

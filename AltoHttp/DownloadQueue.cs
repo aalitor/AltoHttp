@@ -51,7 +51,7 @@ namespace AltoHttp
         public DownloadQueue()
         {
             downloader = null;
-            elements = new List<QueueElement>();
+			elements = new List<QueueElement>();
             downloadSpeed = 0;
             queuePaused = true;
         }
@@ -66,11 +66,11 @@ namespace AltoHttp
 
         #region Events
 
-        void downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        void downloader_DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progress = e.Progress;
+        	progress = (int)e.Progress;
             this.CurrentProgress = progress;
-            downloadSpeed = e.Speed;
+            downloadSpeed = e.SpeedInBytes;
         }
 
         void downloader_DownloadCompleted(object sender, EventArgs e)
@@ -151,28 +151,16 @@ namespace AltoHttp
         /// </summary>
         public bool CurrentAcceptRange
         {
-            get { return downloader.AcceptRange; }
+            get { return downloader.Info.AcceptRange; }
         }
 
         /// <summary>
         /// Gets the State of the current download
         /// </summary>
-        public DownloadState State
-        {
-            get
-            {
-                return downloader.State;
-            }
-        }
 
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Adds new download elements into the queue
-        /// </summary>
-        /// <param name="url">The URL source that contains the object will be downloaded</param>
-        /// <param name="destPath">The destination path to save the downloaded file</param>
         public void Add(string url, string destPath)
         {
 
@@ -191,7 +179,7 @@ namespace AltoHttp
         {
             if (elements[index].Equals(currentElement) && downloader != null)
             {
-                downloader.Cancel();
+                downloader.Pause();
                 currentElement = new QueueElement() { Url = "" };
             }
             elements.RemoveAt(index);
@@ -218,7 +206,7 @@ namespace AltoHttp
         public void Cancel()
         {
             if (downloader != null)
-                downloader.Cancel();
+                downloader.Pause();
             Thread.Sleep(100);
             elements.Clear();
             queuePaused = true;
@@ -233,7 +221,17 @@ namespace AltoHttp
                 createNextDownload();
                 return;
             }
-            downloader.ResumeAsync();
+            downloader.Resume();
+            queuePaused = false;
+        }
+        public void ResumeAsync(string filePath)
+        {
+            if (currentElement.Url == "")
+            {
+                createNextDownload();
+                return;
+            }
+            downloader.Resume(filePath);
             queuePaused = false;
         }
         /// <summary>
@@ -260,8 +258,8 @@ namespace AltoHttp
             if (string.IsNullOrEmpty(elt.Url)) return;
             downloader = new HttpDownloader(elt.Url, elt.Destination);
             downloader.DownloadCompleted += downloader_DownloadCompleted;
-            downloader.DownloadProgressChanged += downloader_DownloadProgressChanged;
-            downloader.StartAsync();
+            downloader.ProgressChanged += downloader_DownloadProgressChanged;
+            downloader.Start();
             currentElement = elt;
             queuePaused = false;
             startEventRaised = false;

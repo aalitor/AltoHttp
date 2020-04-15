@@ -30,21 +30,21 @@ namespace AltoHttp
             
             return Id.GetHashCode() ^ Url.GetHashCode() ^ Destination.GetHashCode() ^ Completed.GetHashCode();
         }
-        /// <summary>
-        /// Download object id
-        /// </summary>
-        public string Id;
+		/// <summary>
+		/// Download object id
+		/// </summary>
+		public string Id{ get; set; }
         /// <summary>
         /// Url source string
         /// </summary>
-        public string Url;
+        public string Url{ get; set; }
         /// <summary>
         /// Destination file path to save the data
         /// </summary>
-        public string Destination;
+        public string Destination{ get; set; }
         /// <summary>
         /// Boolean value specifies if the download is completed
         /// </summary>
-        public bool Completed;
+        public bool Completed{ get; set; }
     }
 }
