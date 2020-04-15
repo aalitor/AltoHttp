@@ -25,7 +25,7 @@ downloader.Start();
 //PAUSE
 downloader.Pause();
 //RESUME
-downloader.Resume();
+downloader.Resume(); //downloader.Resume(filePathToResume) resumes from the existing file
 </code>
 </pre>
 
