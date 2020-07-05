@@ -41,10 +41,18 @@ namespace AltoHttp
 			return request;
 		}
 		
-		public static HttpWebResponse CreateRequestGetResponse(RemoteFileInfo info, long start)
+		public static HttpWebResponse CreateRequestGetResponse(RemoteFileInfo info, long start, EventHandler<BeforeSendingRequestEventArgs> before, EventHandler<AfterGettingResponseEventArgs> after)
 		{
 			var request = CreateHttpRequest(info, start);
+			if(before != null)
+			{
+				before(null, new BeforeSendingRequestEventArgs(request));
+			}
 			var response = (HttpWebResponse)request.GetResponse();
+			if(after != null)
+			{
+				after(null, new AfterGettingResponseEventArgs(response));
+			}
 			if(response.ContentLength != info.Length - start)
 				throw new Exception("Returned content size is wrong; must be " + (info.Length - start));
 			

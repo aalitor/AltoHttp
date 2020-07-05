@@ -17,7 +17,7 @@ namespace AltoHttp
 	{
 		public static string ToHumanReadableSize(this long byteLen)
 		{
-			string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+			string[] sizes = { "Bytes", "Kb", "Mb", "Gb", "Tb" };
 			int order = 0;
 			double len = byteLen;
 			while (len >= 1024d && order < sizes.Length - 1) {
@@ -26,6 +26,16 @@ namespace AltoHttp
 			}
 
 			return String.Format("{0:0.##} {1}", len, sizes[order]);
+		}
+		public static string ToHumanReadableSize(this int byteLen)
+		{
+			return ((long)byteLen).ToHumanReadableSize();
+		}
+		public static double Convert(this long value, SizeUnit from, SizeUnit to)
+		{
+			int step = to - from;
+			
+			return value * Math.Pow(1024, step);
 		}
 	}
 }

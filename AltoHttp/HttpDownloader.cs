@@ -23,6 +23,8 @@ namespace AltoHttp
 		public delegate void ProgressChangedEventHandler(object sender, ProgressChangedEventArgs e);
 		public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
 		public event EventHandler DownloadCompleted;
+		public event EventHandler<BeforeSendingRequestEventArgs> BeforeSendingRequest;
+		public event EventHandler<AfterGettingResponseEventArgs>  AfterGettingResponse;
 		public event ProgressChangedEventHandler ProgressChanged;
 		public event StatusChangedEventHandler StatusChanged;
 		public event ErrorEventHandler ErrorOccured;
@@ -44,8 +46,10 @@ namespace AltoHttp
 		}
 		void Process()
 		{
-			try {
-				if (Info == null) {
+			try
+			{
+				if (Info == null)
+				{
 					State = Status.GettingHeaders;
 					GetHeaders();
 				}
@@ -53,53 +57,67 @@ namespace AltoHttp
 				int bytesRead = 0;
 				var buffer = new byte[2 * 1024];
 				State = Status.SendingRequest;
-				using (var response = RequestHelper.CreateRequestGetResponse(Info, RemainingRangeStart)) {
+				using (var response = RequestHelper.CreateRequestGetResponse(Info, RemainingRangeStart,BeforeSendingRequest , AfterGettingResponse))
+				{
 					State = Status.GettingResponse;
 					using (var responseStream = response.GetResponseStream())
-					using (var file = FileHelper.CheckFile(FullFileName, append)) {
-						while (allowDownload && (bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0) {
+					using (var file = FileHelper.CheckFile(FullFileName, append))
+					{
+						while (allowDownload && (bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+						{
 							State = Status.Downloading;
 							file.Write(buffer, 0, bytesRead);
 							TotalBytesReceived += bytesRead;
 							speedBytesTotal += bytesRead;
 							aop.Post(new System.Threading.SendOrPostCallback(
-								delegate {
-									if (ProgressChanged != null)
-										ProgressChanged(this,
-											new ProgressChangedEventArgs(SpeedInBytes, this.Progress, TotalBytesReceived));
-								}), Progress);
+									delegate
+									{
+										if (ProgressChanged != null)
+											ProgressChanged(this,
+												new ProgressChangedEventArgs(SpeedInBytes, this.Progress, TotalBytesReceived));
+									}), Progress);
 						}
 					}
 				}
 				
 				if (RemainingRangeStart > Info.Length)
 					throw new Exception("Total bytes received overflows content length");
-				if (TotalBytesReceived == Info.Length) {
+				if (TotalBytesReceived == Info.Length)
+				{
 					State = Status.Completed;
 					DownloadCompleted.Raise(this, EventArgs.Empty);
-				} else if (!allowDownload) {
+				}
+				else if (!allowDownload)
+				{
 					State = Status.Paused;
 				}
 				
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				State = Status.ErrorOccured;
-				if (ErrorOccured != null)
-					ErrorOccured(this, new ErrorEventArgs(ex));
+				aop.Post(new System.Threading.SendOrPostCallback(
+						delegate
+						{
+							if (ErrorOccured != null)
+								ErrorOccured(this, new ErrorEventArgs(ex));
+						}), null);
 			}
 		}
 		/// <summary>
-		/// Continues from where the file left
-		/// Note that to avoid corrupted files you definitely use validation
+		/// Starts the download async
 		/// </summary>
-		/// <param name="filePath">The filepath to continue</param>
 		public void Start()
 		{
 			allowDownload = true;
-			Task.Run(() => {
-				Process();
-			});
+			Task.Run(() =>
+				{
+					Process();
+				});
 		}
-		
+		/// <summary>
+		/// Pause download. Resume is enabled unless application open.
+		/// </summary>
 		public void Pause()
 		{
 			if (State != Status.Downloading)
@@ -121,6 +139,9 @@ namespace AltoHttp
 				File.Copy(fileToResume, FullFileName);
 			Start();
 		}
+		/// <summary>
+		/// Continues from where the file left
+		/// </summary>
 		public void Resume()
 		{
 			if (State != Status.Paused && State != Status.ErrorOccured)
@@ -129,33 +150,45 @@ namespace AltoHttp
 		}
 		
 		public long TotalBytesReceived{ get; private set; }
-		public string FileName { 
-			get {
+		public string FileName
+		{ 
+			get
+			{
 				return Path.GetFileName(FullFileName);
 			} 
 		}
-		public string FullFileName {
+		public string FullFileName
+		{
 			get;
 			private set;
 		}
 		public string Url{ get; private set; }
-		public long RemainingRangeStart {
-			get {
+		public long RemainingRangeStart
+		{
+			get
+			{
 				return TotalBytesReceived;
 			}
 		}
 		private Status state;
-		Status State {
+		Status State
+		{
 			get{ return state; }
-			set {
-				if (value != state) {
+			set
+			{
+				if (value != state)
+				{
 					aop.Post(
-						new System.Threading.SendOrPostCallback(delegate {
-							StatusChanged(this, new StatusChangedEventArgs(value));
-						}), null);
-					if (value == Status.Downloading) {
+						new System.Threading.SendOrPostCallback(delegate
+							{
+								StatusChanged(this, new StatusChangedEventArgs(value));
+							}), null);
+					if (value == Status.Downloading)
+					{
 						stp.Start();
-					} else {
+					}
+					else
+					{
 						speedBytesTotal = 0;
 						stp.Stop();
 					}
@@ -165,8 +198,10 @@ namespace AltoHttp
 			}
 		}
 		public RemoteFileInfo Info{ get; private set; }
-		int SpeedInBytes {
-			get {
+		int SpeedInBytes
+		{
+			get
+			{
 				return (int)(speedBytesTotal * 1d / stp.Elapsed.TotalSeconds);
 			} 
 		}
