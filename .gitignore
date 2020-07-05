@@ -195,4 +195,5 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 AltoHttp/_CreateNewNuGetPackage/DoNotModify/CreateNuGetPackage.ps1
-*.dll
+*.config
+*.ps1

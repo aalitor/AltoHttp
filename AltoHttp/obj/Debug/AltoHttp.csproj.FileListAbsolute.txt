@@ -1,6 +1,5 @@
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.dll
 C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.pdb
 C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.csprojResolveAssemblyReference.cache
-C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.pdb
-C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.dll.config
-C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\bin\Debug\AltoHttp.dll
 C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.dll
+C:\Users\kafeinaltor\Documents\SharpDevelop Projects\AltoHttp\AltoHttp\obj\Debug\AltoHttp.pdb
