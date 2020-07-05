@@ -35,7 +35,7 @@ namespace AltoHttp
 		{
 			int step = to - from;
 			
-			return value * Math.Pow(1024, step);
+			return value / Math.Pow(1024, step);
 		}
 	}
 }
