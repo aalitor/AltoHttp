@@ -16,7 +16,7 @@ This simple library provides downloading over Http. It supports Pause and Resume
 <pre><code style="font-size:19px;"><b>Install-Package AltoHttp</b></code></pre>
 
 
-#Usage
+<h2>#Usage</h2>
 Downloading is so simple
 <pre>
 <code>
@@ -40,6 +40,25 @@ myQueue.Pause();
 //RESUME
 myQueue.ResumeAsync();
 </code></pre>
+
+<h1>New Features:</h1>
+<h2>#Ability to edit Http request and response</h2>
+<pre>
+<code>
+HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
+downloader.BeforeSendingRequest += EventHandler_1
+downloader.AfterGettingResponse += EventHandler_2
+
+void EventHandler_1(object sender, BeforeSendingEventArgs e)
+{
+  //Use e.Request to edit the web request
+}
+void EventHandler_2(object sender, BeforeSendingEventArgs e)
+{
+  //Use e.Response to edit the web response
+}
+</code>
+</pre>
 
 <h3>Demo Application</h3>
 <img src="http://i.imgur.com/PokHWEf.png" />
