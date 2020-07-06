@@ -13,7 +13,7 @@ namespace AltoHttp
 	/// <summary>
 	/// Description of StateChangedEventArgs.
 	/// </summary>
-	public class StatusChangedEventArgs
+	public class StatusChangedEventArgs : EventArgs
 	{
 		public StatusChangedEventArgs(Status status)
 		{

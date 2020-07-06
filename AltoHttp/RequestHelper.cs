@@ -15,22 +15,22 @@ namespace AltoHttp
 	/// </summary>
 	public static class RequestHelper
 	{
-		public static HttpWebRequest CreateHttpRequest(RemoteFileInfo info, long start)
+		public static HttpWebRequest CreateHttpRequest(RemoteFileInfo info, long start, EventHandler<BeforeSendingRequestEventArgs> before)
 		{
-			if(start < 0 || start >= info.Length)
+			if (start < 0 || start >= info.Length)
 				throw new Exception("Range start index is out of the bounds");
 			
-			if(start > 0 && !info.AcceptRange)
+			if (start > 0 && !info.AcceptRange)
 				throw new Exception("Remote file doesn't support ranges");
 			
-			var request = CreateHttpRequest(info.URL);
+			var request = CreateHttpRequest(info.URL, before);
 			request.AddRange(start);
 			
 			return request;
 		}
 		
 		
-		public static HttpWebRequest CreateHttpRequest(string url)
+		public static HttpWebRequest CreateHttpRequest(string url, EventHandler<BeforeSendingRequestEventArgs> before)
 		{
 			var request = (HttpWebRequest)WebRequest.Create(url);
 			request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362";
@@ -38,22 +38,19 @@ namespace AltoHttp
 			request.Method = "GET";
 			request.Timeout = 10000;
 			request.ReadWriteTimeout = 5000;
+			before.Raise(null, new BeforeSendingRequestEventArgs(request));
 			return request;
 		}
 		
 		public static HttpWebResponse CreateRequestGetResponse(RemoteFileInfo info, long start, EventHandler<BeforeSendingRequestEventArgs> before, EventHandler<AfterGettingResponseEventArgs> after)
 		{
-			var request = CreateHttpRequest(info, start);
-			if(before != null)
-			{
-				before(null, new BeforeSendingRequestEventArgs(request));
-			}
+			var request = CreateHttpRequest(info, start, before);
+			
 			var response = (HttpWebResponse)request.GetResponse();
-			if(after != null)
-			{
-				after(null, new AfterGettingResponseEventArgs(response));
-			}
-			if(response.ContentLength != info.Length - start)
+			
+			after.Raise(null, new AfterGettingResponseEventArgs(response));
+			
+			if (response.ContentLength != info.Length - start)
 				throw new Exception("Returned content size is wrong; must be " + (info.Length - start));
 			
 			return response;

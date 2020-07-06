@@ -15,7 +15,7 @@ namespace AltoHttp
 	/// </summary>
 	public static class EventHelper
 	{
-		public static void Raise(this EventHandler ev, object sender, EventArgs e)
+		public static void Raise<T>(this EventHandler<T> ev, object sender, T e) where T:EventArgs
 		{
 			AsyncOperation aop = AsyncOperationManager.CreateOperation(null);
 			aop.Post(new System.Threading.SendOrPostCallback(delegate {

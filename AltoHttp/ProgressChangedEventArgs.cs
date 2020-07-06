@@ -13,7 +13,7 @@ namespace AltoHttp
 	/// <summary>
 	/// Description of ProgressChangedEventArgs.
 	/// </summary>
-	public class ProgressChangedEventArgs
+	public class ProgressChangedEventArgs : EventArgs
 	{
 		public ProgressChangedEventArgs(int speed, double progress, long totalBytesReceived)
 		{

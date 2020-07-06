@@ -21,14 +21,17 @@ namespace AltoHttp
 		public bool AcceptRange{ get; set; }
 		public string ServerFileName{ get; set; }
 		public string URL{ get; set; }
-		public long Length{get;set;}
+		public long Length{ get; set; }
 		
-		public static RemoteFileInfo Get(string url)
+		public static RemoteFileInfo Get(string url, EventHandler<BeforeSendingRequestEventArgs> before, EventHandler<AfterGettingResponseEventArgs> after)
 		{
 			
-			using (var response = (HttpWebResponse)RequestHelper.CreateHttpRequest(url).GetResponse()) {
+			using (var response = (HttpWebResponse)RequestHelper.CreateHttpRequest(url, before).GetResponse())
+			{
+				after.Raise(null, new AfterGettingResponseEventArgs(response));
 				var headers = response.Headers;
-				return new RemoteFileInfo() {
+				return new RemoteFileInfo()
+				{
 					AcceptRange = headers.AllKeys.Any(x => x.ToLower().Contains("range") && headers[x].Contains("bytes")),
 					ServerFileName = Path.GetFileName(new Uri(url).LocalPath),
 					URL = url,

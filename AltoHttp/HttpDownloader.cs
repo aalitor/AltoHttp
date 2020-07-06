@@ -20,14 +20,12 @@ namespace AltoHttp
 	public class HttpDownloader
 	{
 		private AsyncOperation aop;
-		public delegate void ProgressChangedEventHandler(object sender, ProgressChangedEventArgs e);
-		public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
-		public event EventHandler DownloadCompleted;
+		public event EventHandler<EventArgs> DownloadCompleted;
 		public event EventHandler<BeforeSendingRequestEventArgs> BeforeSendingRequest;
-		public event EventHandler<AfterGettingResponseEventArgs>  AfterGettingResponse;
-		public event ProgressChangedEventHandler ProgressChanged;
-		public event StatusChangedEventHandler StatusChanged;
-		public event ErrorEventHandler ErrorOccured;
+		public event EventHandler<AfterGettingResponseEventArgs> AfterGettingResponse;
+		public event EventHandler<ProgressChangedEventArgs> ProgressChanged;
+		public event EventHandler<StatusChangedEventArgs> StatusChanged;
+		public event EventHandler<ErrorEventArgs> ErrorOccured;
 		private volatile bool allowDownload;
 		private Stopwatch stp;
 		private long speedBytesTotal;
@@ -42,7 +40,7 @@ namespace AltoHttp
 		}
 		public void GetHeaders()
 		{
-			Info = RemoteFileInfo.Get(Url);
+			Info = RemoteFileInfo.Get(Url, BeforeSendingRequest, AfterGettingResponse);
 		}
 		void Process()
 		{
@@ -57,7 +55,7 @@ namespace AltoHttp
 				int bytesRead = 0;
 				var buffer = new byte[2 * 1024];
 				State = Status.SendingRequest;
-				using (var response = RequestHelper.CreateRequestGetResponse(Info, RemainingRangeStart,BeforeSendingRequest , AfterGettingResponse))
+				using (var response = RequestHelper.CreateRequestGetResponse(Info, RemainingRangeStart, BeforeSendingRequest, AfterGettingResponse))
 				{
 					State = Status.GettingResponse;
 					using (var responseStream = response.GetResponseStream())
@@ -72,8 +70,7 @@ namespace AltoHttp
 							aop.Post(new System.Threading.SendOrPostCallback(
 									delegate
 									{
-										if (ProgressChanged != null)
-											ProgressChanged(this,
+										ProgressChanged.Raise(this,
 												new ProgressChangedEventArgs(SpeedInBytes, this.Progress, TotalBytesReceived));
 									}), Progress);
 						}
@@ -99,8 +96,7 @@ namespace AltoHttp
 				aop.Post(new System.Threading.SendOrPostCallback(
 						delegate
 						{
-							if (ErrorOccured != null)
-								ErrorOccured(this, new ErrorEventArgs(ex));
+							ErrorOccured.Raise(this, new ErrorEventArgs(ex));
 						}), null);
 			}
 		}
@@ -181,7 +177,7 @@ namespace AltoHttp
 					aop.Post(
 						new System.Threading.SendOrPostCallback(delegate
 							{
-								StatusChanged(this, new StatusChangedEventArgs(value));
+								StatusChanged.Raise(this, new StatusChangedEventArgs(value));
 							}), null);
 					if (value == Status.Downloading)
 					{
