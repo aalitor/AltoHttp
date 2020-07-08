@@ -1,10 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 # SharpDevelop 5.1
-VisualStudioVersion = 12.0.20827.3
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltoHttp", "AltoHttp\AltoHttp.csproj", "{A7C51DD6-41F0-4FE8-8CE3-D00FA8580343}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltoHttp", "AltoHttp\AltoHttp.csproj", "{A58E30EC-3D03-4873-B848-FA8E5877D2AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,9 +10,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7C51DD6-41F0-4FE8-8CE3-D00FA8580343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7C51DD6-41F0-4FE8-8CE3-D00FA8580343}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7C51DD6-41F0-4FE8-8CE3-D00FA8580343}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7C51DD6-41F0-4FE8-8CE3-D00FA8580343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A58E30EC-3D03-4873-B848-FA8E5877D2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A58E30EC-3D03-4873-B848-FA8E5877D2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A58E30EC-3D03-4873-B848-FA8E5877D2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A58E30EC-3D03-4873-B848-FA8E5877D2AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

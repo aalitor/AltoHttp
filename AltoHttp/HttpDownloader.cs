@@ -167,7 +167,7 @@ namespace AltoHttp
 			}
 		}
 		private Status state;
-		Status State
+		public Status State
 		{
 			get{ return state; }
 			set
