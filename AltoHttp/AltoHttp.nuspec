@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AltoHttp</id>
+    <version>1.4.5</version>
+    <title>AltoHttp</title>
+    <authors>aalitor</authors>
+    <owners>aalitor</owners>
+    <licenseUrl>https://github.com/aalitor/AltoHttp/blob/add-new-features/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/aalitor/AltoHttp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>AltoHttp provides fast and easy download management</description>
+    <releaseNotes>State property changed to publicly accessible</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>alto http download management fast easy pause speed resume progress</tags>
+  </metadata>
+</package>
