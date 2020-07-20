@@ -49,11 +49,11 @@ HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
 downloader.BeforeSendingRequest += EventHandler_1
 downloader.AfterGettingResponse += EventHandler_2
 
-void EventHandler_1(object sender, BeforeSendingEventArgs e)
+void EventHandler_1(object sender, BeforeSendingRequestEventArgs e)
 {
   //Use e.Request to edit the web request
 }
-void EventHandler_2(object sender, BeforeSendingEventArgs e)
+void EventHandler_2(object sender, AfterGettingResponseEventArgs e)
 {
   //Use e.Response to edit the web response
 }
