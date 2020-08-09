@@ -38,6 +38,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -49,6 +50,7 @@
     <Compile Include="DownloadQueue.cs" />
     <Compile Include="EventHelper.cs" />
     <Compile Include="FileHelper.cs" />
+    <Compile Include="FileNameHelper.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="HttpDownloader.cs" />
     <Compile Include="IQueue.cs" />

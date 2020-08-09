@@ -33,7 +33,7 @@ namespace AltoHttp
 				return new RemoteFileInfo()
 				{
 					AcceptRange = headers.AllKeys.Any(x => x.ToLower().Contains("range") && headers[x].Contains("bytes")),
-					ServerFileName = Path.GetFileName(new Uri(url).LocalPath),
+					ServerFileName = FileNameHelper.GetFileName(response),
 					URL = url,
 					Length = response.ContentLength
 				};
