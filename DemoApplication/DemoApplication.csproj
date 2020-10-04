@@ -36,8 +36,8 @@
     <StartupObject>DemoApplication.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AltoHttp, Version=1.0.7582.40992, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AltoHttp.1.4.6\lib\net452\AltoHttp.dll</HintPath>
+    <Reference Include="AltoHttp, Version=1.0.7582.42241, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AltoHttp.1.4.7\lib\net452\AltoHttp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

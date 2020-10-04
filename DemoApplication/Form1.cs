@@ -30,20 +30,25 @@ namespace DemoApplication
             var defaultFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             var defaultFileName = "default.unknown";
             var defaultSavePath = Path.Combine(defaultFolder, defaultFileName);
-            downloader = new HttpDownloader(url, defaultFolder);
+            downloader = new HttpDownloader(url, defaultSavePath);
             downloader.StatusChanged += downloader_StatusChanged;
             downloader.DownloadInfoReceived += downloader_DownloadInfoReceived;
             downloader.DownloadCompleted += downloader_DownloadCompleted;
             downloader.ProgressChanged += downloader_ProgressChanged;
-
+            downloader.ErrorOccured += downloader_ErrorOccured;
             btnStart.Enabled = false;
             downloader.Start();;
+        }
+
+        void downloader_ErrorOccured(object sender, ErrorEventArgs e)
+        {
+            MessageBox.Show("Error: " + e.GetException().Message);
         }
 
         void downloader_ProgressChanged(object sender, AltoHttp.ProgressChangedEventArgs e)
         {
             lblTotalBytesReceived.Text = string.Format("{0} / {1}",
-                downloader.TotalBytesReceived,
+                e.TotalBytesReceived,
                 downloader.Info.Length);
             lblProgress.Text = e.Progress.ToString("0.00") + "%";
             lblSpeed.Text = e.SpeedInBytes.ToHumanReadableSize() + "/s";
@@ -62,7 +67,7 @@ namespace DemoApplication
 
             var newFilePath = Path.Combine(saveDirectory, serverFileName);
 
-            //downloader.FullFileName = newFilePath;
+            downloader.FullFileName = newFilePath;
 
             lblFileName.Text = downloader.Info.ServerFileName;
             lblResumeability.Text = downloader.Info.AcceptRange ? "Yes" : "No";
