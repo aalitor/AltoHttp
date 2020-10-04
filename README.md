@@ -59,7 +59,7 @@ void EventHandler_2(object sender, AfterGettingResponseEventArgs e)
 }
 </code>
 </pre>
-<h2>#Using download info received event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
+<h2>#Using DownloadInfoReceived event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
 <pre>
 <code>
 HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
