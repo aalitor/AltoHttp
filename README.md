@@ -3,7 +3,7 @@ This simple library provides downloading over Http. It supports Pause and Resume
 
 •	Download file with just one line of code
 
-•	Get most useful properties of the download source such as ContentLength, Accept-Range..
+•	Get most useful properties of the download source such as ContentLength, Resumeability, ServerFileName..
 
 •	Due to event based programming, managing downloads is so easy
 
@@ -59,6 +59,18 @@ void EventHandler_2(object sender, AfterGettingResponseEventArgs e)
 }
 </code>
 </pre>
+<h2>#Using DownloadInfoReceived event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
+<pre>
+<code>
+HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
+downloader.DownloadInfoReceived += downloader_DownloadInfoReceived
+
+void downloader_DownloadInfoReceived(object sender, BeforeSendingRequestEventArgs e)
+{
+  var filename = downloader.Info.ServerFileName;
+  var resumeability = downloader.Info.AcceptRange;
+  var contentSize = downloader.Info.Length;
+}
 
 <h3>Demo Application</h3>
 <img src="http://i.imgur.com/PokHWEf.png" />
