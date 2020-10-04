@@ -73,6 +73,6 @@ void downloader_DownloadInfoReceived(object sender, BeforeSendingRequestEventArg
 }
 
 <h3>Demo Application</h3>
-<img src="blob:https://imgur.com/4ad3a697-c986-4586-b7fa-9f7efd2f7e97" />
+<img src="https://i.imgur.com/B39NzAs.png" />
 
 
