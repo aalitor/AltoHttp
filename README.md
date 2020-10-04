@@ -3,7 +3,7 @@ This simple library provides downloading over Http. It supports Pause and Resume
 
 •	Download file with just one line of code
 
-•	Get most useful properties of the download source such as ContentLength, Accept-Range..
+•	Get most useful properties of the download source such as ContentLength, Resumeability, ServerFileName..
 
 •	Due to event based programming, managing downloads is so easy
 
