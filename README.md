@@ -59,6 +59,18 @@ void EventHandler_2(object sender, AfterGettingResponseEventArgs e)
 }
 </code>
 </pre>
+<h2>#Using download info received event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
+<pre>
+<code>
+HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
+downloader.DownloadInfoReceived += downloader_DownloadInfoReceived
+
+void downloader_DownloadInfoReceived(object sender, BeforeSendingRequestEventArgs e)
+{
+  var filename = downloader.Info.ServerFileName;
+  var resumeability = downloader.Info.AcceptRange;
+  var contentSize = downloader.Info.Length;
+}
 
 <h3>Demo Application</h3>
 <img src="http://i.imgur.com/PokHWEf.png" />
