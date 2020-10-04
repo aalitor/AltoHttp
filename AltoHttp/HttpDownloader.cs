@@ -26,6 +26,7 @@ namespace AltoHttp
 		public event EventHandler<ProgressChangedEventArgs> ProgressChanged;
 		public event EventHandler<StatusChangedEventArgs> StatusChanged;
 		public event EventHandler<ErrorEventArgs> ErrorOccured;
+        public event EventHandler<EventArgs> DownloadInfoReceived;
 		private volatile bool allowDownload;
 		private Stopwatch stp;
 		private long speedBytesTotal;
@@ -42,7 +43,8 @@ namespace AltoHttp
 		{
 			Info = RemoteFileInfo.Get(Url, BeforeSendingRequest, AfterGettingResponse);
 		}
-		void Process()
+
+        private void Process()
 		{
 			try
 			{
@@ -50,9 +52,10 @@ namespace AltoHttp
 				{
 					State = Status.GettingHeaders;
 					GetHeaders();
+                    DownloadInfoReceived.Raise(this, EventArgs.Empty);
 				}
 				var append = RemainingRangeStart > 0;
-				int bytesRead = 0;
+				var bytesRead = 0;
 				var buffer = new byte[2 * 1024];
 				State = Status.SendingRequest;
 				using (var response = RequestHelper.CreateRequestGetResponse(Info, RemainingRangeStart, BeforeSendingRequest, AfterGettingResponse))
@@ -67,12 +70,11 @@ namespace AltoHttp
 							file.Write(buffer, 0, bytesRead);
 							TotalBytesReceived += bytesRead;
 							speedBytesTotal += bytesRead;
-							aop.Post(new System.Threading.SendOrPostCallback(
-									delegate
-									{
-										ProgressChanged.Raise(this,
-												new ProgressChangedEventArgs(SpeedInBytes, this.Progress, TotalBytesReceived));
-									}), Progress);
+							aop.Post(delegate
+                            {
+                                ProgressChanged.Raise(this,
+                                    new ProgressChangedEventArgs(SpeedInBytes, this.Progress, TotalBytesReceived));
+                            }, Progress);
 						}
 					}
 				}
@@ -93,11 +95,10 @@ namespace AltoHttp
 			catch (Exception ex)
 			{
 				State = Status.ErrorOccured;
-				aop.Post(new System.Threading.SendOrPostCallback(
-						delegate
-						{
-							ErrorOccured.Raise(this, new ErrorEventArgs(ex));
-						}), null);
+				aop.Post(delegate
+                {
+                    ErrorOccured.Raise(this, new ErrorEventArgs(ex));
+                }, null);
 			}
 		}
 		/// <summary>
@@ -175,10 +176,10 @@ namespace AltoHttp
 				if (value != state)
 				{
 					aop.Post(
-						new System.Threading.SendOrPostCallback(delegate
-							{
-								StatusChanged.Raise(this, new StatusChangedEventArgs(value));
-							}), null);
+						delegate
+                        {
+                            StatusChanged.Raise(this, new StatusChangedEventArgs(value));
+                        }, null);
 					if (value == Status.Downloading)
 					{
 						stp.Start();
@@ -194,13 +195,15 @@ namespace AltoHttp
 			}
 		}
 		public RemoteFileInfo Info{ get; private set; }
-		int SpeedInBytes
+
+        private int SpeedInBytes
 		{
 			get
 			{
 				return (int)(speedBytesTotal * 1d / stp.Elapsed.TotalSeconds);
 			} 
 		}
-		double Progress { get { return TotalBytesReceived * 100d / Info.Length; } }
+
+        private double Progress { get { return TotalBytesReceived * 100d / Info.Length; } }
 	}
 }

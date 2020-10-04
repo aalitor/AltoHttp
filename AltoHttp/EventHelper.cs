@@ -18,10 +18,10 @@ namespace AltoHttp
 		public static void Raise<T>(this EventHandler<T> ev, object sender, T e) where T:EventArgs
 		{
 			AsyncOperation aop = AsyncOperationManager.CreateOperation(null);
-			aop.Post(new System.Threading.SendOrPostCallback(delegate {
-				if (ev != null)
-					ev(sender, e);
-			}), null);
+			aop.Post(delegate {
+                if (ev != null)
+                    ev(sender, e);
+            }, null);
 		}
 	}
 }

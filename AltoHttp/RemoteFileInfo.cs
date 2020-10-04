@@ -30,8 +30,8 @@ namespace AltoHttp
 			{
 				after.Raise(null, new AfterGettingResponseEventArgs(response));
 				var headers = response.Headers;
-				return new RemoteFileInfo()
-				{
+				return new RemoteFileInfo
+                {
 					AcceptRange = headers.AllKeys.Any(x => x.ToLower().Contains("range") && headers[x].Contains("bytes")),
 					ServerFileName = FileNameHelper.GetFileName(response),
 					URL = url,

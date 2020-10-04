@@ -7,8 +7,8 @@ namespace AltoHttp
     /// </summary>
     public class QueueElementCompletedEventArgs : EventArgs
     {
-        int _index;
-        QueueElement _element;
+        private int _index;
+        private QueueElement _element;
         /// <summary>
         /// Contains QueueElementCompleted event args
         /// </summary>

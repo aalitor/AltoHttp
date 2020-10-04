@@ -18,12 +18,12 @@ namespace AltoHttp
     {
         #region Variables
 
-        HttpDownloader downloader;
-        List<QueueElement> elements;
-        QueueElement currentElement;
-        int progress;
-        int downloadSpeed;
-        bool queuePaused, startEventRaised;
+        private HttpDownloader downloader;
+        private List<QueueElement> elements;
+        private QueueElement currentElement;
+        private int progress;
+        private int downloadSpeed;
+        private bool queuePaused, startEventRaised;
 
         /// <summary>
         /// Occurs when queue element's progress is changed
@@ -66,14 +66,14 @@ namespace AltoHttp
 
         #region Events
 
-        void downloader_DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void downloader_DownloadProgressChanged(object sender, ProgressChangedEventArgs e)
         {
         	progress = (int)e.Progress;
             this.CurrentProgress = progress;
             downloadSpeed = e.SpeedInBytes;
         }
 
-        void downloader_DownloadCompleted(object sender, EventArgs e)
+        private void downloader_DownloadCompleted(object sender, EventArgs e)
         {
             if (QueueElementCompleted != null)
                 QueueElementCompleted(this, new QueueElementCompletedEventArgs(this.CurrentIndex, currentElement));
@@ -81,7 +81,7 @@ namespace AltoHttp
             {
                 if (elements[i].Equals(currentElement))
                 {
-                    elements[i] = new QueueElement()
+                    elements[i] = new QueueElement
                     {
                         Id = elements[i].Id,
                         Url = elements[i].Url,
@@ -164,7 +164,7 @@ namespace AltoHttp
         public void Add(string url, string destPath)
         {
 
-            elements.Add(new QueueElement()
+            elements.Add(new QueueElement
             {
                 Id = Guid.NewGuid().ToString(),
                 Url = url,
@@ -180,7 +180,7 @@ namespace AltoHttp
             if (elements[index].Equals(currentElement) && downloader != null)
             {
                 downloader.Pause();
-                currentElement = new QueueElement() { Url = "" };
+                currentElement = new QueueElement { Url = "" };
             }
             elements.RemoveAt(index);
             if (!queuePaused)
@@ -252,7 +252,8 @@ namespace AltoHttp
         #endregion
 
         #region Helper Methods
-        void createNextDownload()
+
+        private void createNextDownload()
         {
             QueueElement elt = getFirstNotCompletedElement();
             if (string.IsNullOrEmpty(elt.Url)) return;
@@ -264,7 +265,8 @@ namespace AltoHttp
             queuePaused = false;
             startEventRaised = false;
         }
-        QueueElement getFirstNotCompletedElement()
+
+        private QueueElement getFirstNotCompletedElement()
         {
             for (int i = 0; i < elements.Count; i++)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AltoHttp
 {
-    interface IQueue
+    internal interface IQueue
     {
         event EventHandler QueueCompleted;
         event QueueElementCompletedEventHandler QueueElementCompleted;
