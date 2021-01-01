@@ -32,6 +32,7 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnPuaseOrResume = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lblTotalBytesReceived = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,6 +45,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblResumeability = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblIsChunked = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +54,7 @@
             // 
             this.txtUrl.Location = new System.Drawing.Point(13, 12);
             this.txtUrl.Name = "txtUrl";
-            this.txtUrl.Size = new System.Drawing.Size(326, 20);
+            this.txtUrl.Size = new System.Drawing.Size(416, 20);
             this.txtUrl.TabIndex = 0;
             // 
             // btnStart
@@ -74,11 +77,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.progressBar);
             this.groupBox1.Controls.Add(this.lblTotalBytesReceived);
             this.groupBox1.Controls.Add(this.lblSpeed);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.lblIsChunked);
             this.groupBox1.Controls.Add(this.lblProgress);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lblSize);
             this.groupBox1.Controls.Add(this.label3);
@@ -88,15 +94,23 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 74);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(326, 196);
+            this.groupBox1.Size = new System.Drawing.Size(416, 173);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Download Informations";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(25, 133);
+            this.progressBar.Maximum = 10000;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(384, 23);
+            this.progressBar.TabIndex = 15;
+            // 
             // lblTotalBytesReceived
             // 
             this.lblTotalBytesReceived.AutoSize = true;
-            this.lblTotalBytesReceived.Location = new System.Drawing.Point(122, 172);
+            this.lblTotalBytesReceived.Location = new System.Drawing.Point(298, 77);
             this.lblTotalBytesReceived.Name = "lblTotalBytesReceived";
             this.lblTotalBytesReceived.Size = new System.Drawing.Size(53, 13);
             this.lblTotalBytesReceived.TabIndex = 3;
@@ -105,7 +119,7 @@
             // lblSpeed
             // 
             this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Location = new System.Drawing.Point(122, 142);
+            this.lblSpeed.Location = new System.Drawing.Point(298, 47);
             this.lblSpeed.Name = "lblSpeed";
             this.lblSpeed.Size = new System.Drawing.Size(53, 13);
             this.lblSpeed.TabIndex = 4;
@@ -114,16 +128,16 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 172);
+            this.label6.Location = new System.Drawing.Point(209, 77);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 13);
+            this.label6.Size = new System.Drawing.Size(83, 13);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Bytes Received:";
+            this.label6.Text = "Total Received:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 142);
+            this.label5.Location = new System.Drawing.Point(209, 47);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 6;
@@ -132,7 +146,7 @@
             // lblProgress
             // 
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(122, 112);
+            this.lblProgress.Location = new System.Drawing.Point(117, 103);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(53, 13);
             this.lblProgress.TabIndex = 7;
@@ -141,7 +155,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 112);
+            this.label4.Location = new System.Drawing.Point(22, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 13);
             this.label4.TabIndex = 8;
@@ -150,7 +164,7 @@
             // lblSize
             // 
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(122, 82);
+            this.lblSize.Location = new System.Drawing.Point(117, 75);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(53, 13);
             this.lblSize.TabIndex = 9;
@@ -159,7 +173,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 82);
+            this.label3.Location = new System.Drawing.Point(22, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 13);
             this.label3.TabIndex = 10;
@@ -168,7 +182,7 @@
             // lblFileName
             // 
             this.lblFileName.AutoSize = true;
-            this.lblFileName.Location = new System.Drawing.Point(122, 52);
+            this.lblFileName.Location = new System.Drawing.Point(117, 21);
             this.lblFileName.Name = "lblFileName";
             this.lblFileName.Size = new System.Drawing.Size(53, 13);
             this.lblFileName.TabIndex = 11;
@@ -177,7 +191,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 52);
+            this.label2.Location = new System.Drawing.Point(22, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 12;
@@ -186,7 +200,7 @@
             // lblResumeability
             // 
             this.lblResumeability.AutoSize = true;
-            this.lblResumeability.Location = new System.Drawing.Point(122, 22);
+            this.lblResumeability.Location = new System.Drawing.Point(117, 47);
             this.lblResumeability.Name = "lblResumeability";
             this.lblResumeability.Size = new System.Drawing.Size(53, 13);
             this.lblResumeability.TabIndex = 13;
@@ -195,17 +209,35 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 22);
+            this.label1.Location = new System.Drawing.Point(22, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Supports Resume:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(209, 103);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Is Chunked:";
+            // 
+            // lblIsChunked
+            // 
+            this.lblIsChunked.AutoSize = true;
+            this.lblIsChunked.Location = new System.Drawing.Point(298, 103);
+            this.lblIsChunked.Name = "lblIsChunked";
+            this.lblIsChunked.Size = new System.Drawing.Size(53, 13);
+            this.lblIsChunked.TabIndex = 7;
+            this.lblIsChunked.Text = "Unknown";
+            // 
             // AltoHttpDemoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 280);
+            this.ClientSize = new System.Drawing.Size(434, 263);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnPuaseOrResume);
             this.Controls.Add(this.btnStart);
@@ -237,6 +269,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblResumeability;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label lblIsChunked;
+        private System.Windows.Forms.Label label7;
     }
 }
 

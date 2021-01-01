@@ -13,6 +13,7 @@ namespace AltoHttp
         /// Contains QueueElementCompleted event args
         /// </summary>
         /// <param name="index"></param>
+        /// <param name="element"></param>
         public QueueElementCompletedEventArgs(int index, QueueElement element)
         {
             _index = index;

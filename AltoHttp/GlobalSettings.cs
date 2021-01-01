@@ -11,17 +11,20 @@ using System.Net;
 namespace AltoHttp
 {
 	/// <summary>
-	/// Description of GlobalSettings.
+	/// Global service point settings
 	/// </summary>
 	public class GlobalSettings
 	{
+        /// <summary>
+        /// Constructor for settings
+        /// </summary>
 		public GlobalSettings()
 		{
 			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
 			| SecurityProtocolType.Tls11
 			| SecurityProtocolType.Tls12
 			| SecurityProtocolType.Ssl3;
-			ServicePointManager.DefaultConnectionLimit = 10;
+            ServicePointManager.DefaultConnectionLimit = 1000;
 		}
 	}
 }

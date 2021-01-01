@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AltoHttp</RootNamespace>
     <AssemblyName>AltoHttp</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -33,6 +33,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Debug\AltoHttp.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
@@ -43,6 +44,10 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -59,21 +64,35 @@
     <Compile Include="BeforeSendingRequestEventArgs.cs" />
     <Compile Include="DownloadQueue.cs" />
     <Compile Include="EventHelper.cs" />
+    <Compile Include="Exceptions\ContentSizeIsUnknownForRangeRequest.cs" />
+    <Compile Include="Exceptions\FileValidationFailedException.cs" />
+    <Compile Include="Exceptions\NegativeRangeStartOffsetException.cs" />
+    <Compile Include="Exceptions\RangeEndOffsetGreaterThanContentSizeException.cs" />
+    <Compile Include="Exceptions\ResumeDownloadNotSupportedException.cs" />
+    <Compile Include="Exceptions\ResumeNotSupportedForRangeRequest.cs" />
+    <Compile Include="Exceptions\WrongContentSizeReturnedException.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="FileNameHelper.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="HttpDownloader.cs" />
     <Compile Include="IQueue.cs" />
+    <Compile Include="NativeMessaging\DownloadMessage.cs" />
+    <Compile Include="NativeMessaging\Header.cs" />
+    <Compile Include="NativeMessaging\Receiver.cs" />
     <Compile Include="ProgressChangedEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueElement.cs" />
     <Compile Include="QueueElementCompletedEventArgs.cs" />
+    <Compile Include="Exceptions\RangeStartOffsetGreaterThanContentSizeException.cs" />
     <Compile Include="RemoteFileInfo.cs" />
     <Compile Include="RequestHelper.cs" />
     <Compile Include="SizeHelper.cs" />
     <Compile Include="SizeUnit.cs" />
     <Compile Include="StateChangedEventArgs.cs" />
     <Compile Include="Status.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

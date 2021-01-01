@@ -224,14 +224,18 @@ namespace AltoHttp
             downloader.Resume();
             queuePaused = false;
         }
-        public void ResumeAsync(string filePath)
+        /// <summary>
+        /// Resume download async
+        /// </summary>
+        /// <param name="filePath">Filepath to resume</param>
+        public void ResumeAsync(string filePath, string validationChecksum)
         {
             if (currentElement.Url == "")
             {
                 createNextDownload();
                 return;
             }
-            downloader.Resume(filePath);
+            downloader.Resume(filePath, validationChecksum);
             queuePaused = false;
         }
         /// <summary>
