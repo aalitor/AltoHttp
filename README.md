@@ -42,37 +42,19 @@ myQueue.ResumeAsync();
 </code></pre>
 
 <h1>New Features:</h1>
-<h2>#Ability to edit Http request and response</h2>
-<pre>
-<code>
-HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
-downloader.BeforeSendingRequest += EventHandler_1
-downloader.AfterGettingResponse += EventHandler_2
-
-void EventHandler_1(object sender, BeforeSendingRequestEventArgs e)
-{
-  //Use e.Request to edit the web request
-}
-void EventHandler_2(object sender, AfterGettingResponseEventArgs e)
-{
-  //Use e.Response to edit the web response
-}
-</code>
-</pre>
+<h2>#Ability to edit Http request and response with events</h2>
 <h2>#Using DownloadInfoReceived event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
-<pre>
-<code>
-HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
-downloader.DownloadInfoReceived += downloader_DownloadInfoReceived
 
-void downloader_DownloadInfoReceived(object sender, BeforeSendingRequestEventArgs e)
-{
-  var filename = downloader.Info.ServerFileName;
-  var resumeability = downloader.Info.AcceptRange;
-  var contentSize = downloader.Info.Length;
-}
+<h1>New Features on 01.01.2021</h1>
+<h2>#Resume capability improved to be able to resume on some sites that uses chunked stream e.g Google Drive</h2>
+<h2>#Native messaging methods added for who wants to integrate with browser using extension</h2>
+<h2>#To prevent resume on file corruption, file validation based on MD5 added</h2>
+<h2>#New exceptions defined to be able to handle exceptions in UI/h2>
+<h2>#Download in some sites which Content-Length returns -1 (Unknown) succesfully handled /h2>
+<h2>#DemoApplication changed and improved /h2>
+
 
 <h3>Demo Application</h3>
-<img src="https://i.imgur.com/B39NzAs.png" />
+<img src="https://i.imgur.com/7rytDU2.png" />
 
 
