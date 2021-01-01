@@ -42,16 +42,16 @@ myQueue.ResumeAsync();
 </code></pre>
 
 <h1>New Features:</h1>
-<h2>#Ability to edit Http request and response with events</h2>
-<h2>#Using DownloadInfoReceived event you can ensure the headers (Content-Length, Resumeability, FileName) are received</h2>
+•	Ability to edit Http request and response with events
+•	Using DownloadInfoReceived event you can ensure the headers (Content-Length, Resumeability, FileName) are received
 
 <h1>New Features on 01.01.2021</h1>
-<h2>#Resume capability improved to be able to resume on some sites that uses chunked stream e.g Google Drive</h2>
-<h2>#Native messaging methods added for who wants to integrate with browser using extension</h2>
-<h2>#To prevent resume on file corruption, file validation based on MD5 added</h2>
-<h2>#New exceptions defined to be able to handle exceptions in UI/h2>
-<h2>#Download in some sites which Content-Length returns -1 (Unknown) succesfully handled /h2>
-<h2>#DemoApplication changed and improved /h2>
+•	Resume capability improved to be able to resume on some sites that uses chunked stream e.g Google Drive
+•	Native messaging methods added for who wants to integrate with browser using extension
+•	To prevent resume on file corruption, file validation based on MD5 added
+•	New exceptions defined to be able to handle exceptions in UI
+•	Download in some sites which Content-Length returns -1 (Unknown) succesfully handled
+• DemoApplication changed and improved
 
 
 <h3>Demo Application</h3>
