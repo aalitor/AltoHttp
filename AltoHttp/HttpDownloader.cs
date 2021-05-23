@@ -70,6 +70,7 @@ namespace AltoHttp
             this.FullFileName = fullpath;
             allowDownload = true;
             stp = new Stopwatch();
+            state = Status.None;
             aop = AsyncOperationManager.CreateOperation(null);
             new GlobalSettings();
         }
@@ -134,7 +135,7 @@ namespace AltoHttp
             }
             catch (Exception ex)
             {
-                if (TotalBytesReceived == Info.Length)
+                if (Info != null && TotalBytesReceived == Info.Length)
                 {
                     State = Status.Completed;
                     DownloadCompleted.Raise(this, EventArgs.Empty);
@@ -156,7 +157,7 @@ namespace AltoHttp
             }
             finally
             {
-                if(LastError == null || !(LastError is FileValidationFailedException))
+                if (LastError == null || !(LastError is FileValidationFailedException))
                 {
                     LastMD5Checksum = FileHelper.CalculateMD5(FullFileName);
                 }
@@ -190,6 +191,20 @@ namespace AltoHttp
             downloadThread.Abort();
         }
         /// <summary>
+        /// Stops the download, deletes the downloaded file and resets the download
+        /// </summary>
+        public void StopReset()
+        {
+            Pause();
+            if (File.Exists(FullFileName))
+                File.Delete(FullFileName);
+            stp.Reset();
+            speedBytesTotal = 0;
+            downloadThread = null;
+            flagResetSpeedBytes = true;
+            state = Status.None;
+        }
+        /// <summary>
         /// Continues from where the file left
         /// Note that to avoid corrupted files you definitely use validation
         /// </summary>
@@ -217,10 +232,10 @@ namespace AltoHttp
         /// <summary>
         /// Gets the total bytes downloaded
         /// </summary>
-        public long TotalBytesReceived 
-        { 
-            get; 
-            private set; 
+        public long TotalBytesReceived
+        {
+            get;
+            private set;
         }
         /// <summary>
         /// Gets the filename with extension only
@@ -243,10 +258,10 @@ namespace AltoHttp
         /// <summary>
         /// Gets the remote file source url
         /// </summary>
-        public string Url 
-        { 
-            get; 
-            private set; 
+        public string Url
+        {
+            get;
+            private set;
         }
         /// <summary>
         /// Gets the byte offset where the download interrupted
@@ -294,10 +309,10 @@ namespace AltoHttp
         /// <summary>
         /// Gets the remote file properties such as Content-Length, Resumeability...
         /// </summary>
-        public RemoteFileInfo Info 
-        { 
-            get; 
-            private set; 
+        public RemoteFileInfo Info
+        {
+            get;
+            private set;
         }
         /// <summary>
         /// Gets the download speed in bytes
@@ -330,6 +345,6 @@ namespace AltoHttp
         /// Gets the last calculated md5 hash string
         /// </summary>
         public string LastMD5Checksum { get; set; }
-        
+
     }
 }

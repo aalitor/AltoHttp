@@ -20,6 +20,7 @@ namespace AltoHttp
 		SendingRequest,
 		Completed,
 		ErrorOccured,
-		GettingHeaders
+		GettingHeaders,
+        None
 	}
 }
