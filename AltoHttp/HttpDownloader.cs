@@ -279,7 +279,7 @@ namespace AltoHttp
         public Status State
         {
             get { return state; }
-            set
+            private set
             {
                 if (value != state)
                 {

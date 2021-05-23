@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>AltoHttp</id>
-    <version>1.4.7</version>
+    <version>1.4.9</version>
     <title>AltoHttp</title>
     <authors>aalitor</authors>
     <owners>aalitor</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/aalitor/AltoHttp</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>AltoHttp provides fast and easy download management</description>
-    <releaseNotes>DownloadInfoReceived event added, bug fixes</releaseNotes>
+    <releaseNotes>Added stop and reset method, bug fixes</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>alto http download management fast easy pause speed resume progress</tags>
   </metadata>
