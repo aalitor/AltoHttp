@@ -188,7 +188,7 @@ namespace AltoHttp
         public void Pause()
         {
             allowDownload = false;
-            downloadThread.Abort();
+            downloadThread.Interrupt();
         }
         /// <summary>
         /// Stops the download, deletes the downloaded file and resets the download
