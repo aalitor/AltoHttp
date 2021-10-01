@@ -37,7 +37,9 @@
             this.lblSpeed = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblIsChunked = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lblSize = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,8 +47,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblResumeability = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblIsChunked = new System.Windows.Forms.Label();
+            this.btnChromeIntegration = new System.Windows.Forms.Button();
+            this.btnRemoveIntegration = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,7 +94,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblResumeability);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(13, 74);
+            this.groupBox1.Location = new System.Drawing.Point(13, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(416, 173);
             this.groupBox1.TabIndex = 2;
@@ -143,6 +145,15 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Speed:";
             // 
+            // lblIsChunked
+            // 
+            this.lblIsChunked.AutoSize = true;
+            this.lblIsChunked.Location = new System.Drawing.Point(298, 103);
+            this.lblIsChunked.Name = "lblIsChunked";
+            this.lblIsChunked.Size = new System.Drawing.Size(53, 13);
+            this.lblIsChunked.TabIndex = 7;
+            this.lblIsChunked.Text = "Unknown";
+            // 
             // lblProgress
             // 
             this.lblProgress.AutoSize = true;
@@ -151,6 +162,15 @@
             this.lblProgress.Size = new System.Drawing.Size(53, 13);
             this.lblProgress.TabIndex = 7;
             this.lblProgress.Text = "Unknown";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(209, 103);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Is Chunked:";
             // 
             // label4
             // 
@@ -215,29 +235,33 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Supports Resume:";
             // 
-            // label7
+            // btnChromeIntegration
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(209, 103);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(64, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Is Chunked:";
+            this.btnChromeIntegration.Location = new System.Drawing.Point(281, 40);
+            this.btnChromeIntegration.Name = "btnChromeIntegration";
+            this.btnChromeIntegration.Size = new System.Drawing.Size(148, 23);
+            this.btnChromeIntegration.TabIndex = 3;
+            this.btnChromeIntegration.Text = "Add Chrome Integration";
+            this.btnChromeIntegration.UseVisualStyleBackColor = true;
+            this.btnChromeIntegration.Click += new System.EventHandler(this.btnChromeIntegration_Click);
             // 
-            // lblIsChunked
+            // btnRemoveIntegration
             // 
-            this.lblIsChunked.AutoSize = true;
-            this.lblIsChunked.Location = new System.Drawing.Point(298, 103);
-            this.lblIsChunked.Name = "lblIsChunked";
-            this.lblIsChunked.Size = new System.Drawing.Size(53, 13);
-            this.lblIsChunked.TabIndex = 7;
-            this.lblIsChunked.Text = "Unknown";
+            this.btnRemoveIntegration.Location = new System.Drawing.Point(281, 69);
+            this.btnRemoveIntegration.Name = "btnRemoveIntegration";
+            this.btnRemoveIntegration.Size = new System.Drawing.Size(148, 23);
+            this.btnRemoveIntegration.TabIndex = 3;
+            this.btnRemoveIntegration.Text = "Remove Chrome Integration";
+            this.btnRemoveIntegration.UseVisualStyleBackColor = true;
+            this.btnRemoveIntegration.Click += new System.EventHandler(this.btnRemoveIntegration_Click);
             // 
             // AltoHttpDemoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 263);
+            this.ClientSize = new System.Drawing.Size(434, 272);
+            this.Controls.Add(this.btnRemoveIntegration);
+            this.Controls.Add(this.btnChromeIntegration);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnPuaseOrResume);
             this.Controls.Add(this.btnStart);
@@ -272,6 +296,8 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label lblIsChunked;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnChromeIntegration;
+        private System.Windows.Forms.Button btnRemoveIntegration;
     }
 }
 

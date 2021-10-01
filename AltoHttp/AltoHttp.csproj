@@ -62,6 +62,11 @@
   <ItemGroup>
     <Compile Include="AfterGettingResponseEventArgs.cs" />
     <Compile Include="BeforeSendingRequestEventArgs.cs" />
+    <Compile Include="BrowserIntegration\Chrome\AllInOneIntegrator.cs" />
+    <Compile Include="BrowserIntegration\Chrome\Constants.cs" />
+    <Compile Include="BrowserIntegration\Chrome\HostExtensionIntegration.cs" />
+    <Compile Include="BrowserIntegration\Chrome\NativeMessageHost.cs" />
+    <Compile Include="BrowserIntegration\Chrome\RegistryExtensionIntegrator.cs" />
     <Compile Include="DownloadQueue.cs" />
     <Compile Include="EventHelper.cs" />
     <Compile Include="Exceptions\ContentSizeIsUnknownForRangeRequest.cs" />
@@ -75,6 +80,7 @@
     <Compile Include="FileNameHelper.cs" />
     <Compile Include="GlobalSettings.cs" />
     <Compile Include="HttpDownloader.cs" />
+    <Compile Include="HttpHeaderHelper.cs" />
     <Compile Include="IQueue.cs" />
     <Compile Include="NativeMessaging\DownloadMessage.cs" />
     <Compile Include="NativeMessaging\Header.cs" />

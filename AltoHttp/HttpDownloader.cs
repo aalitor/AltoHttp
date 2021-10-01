@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using AltoHttp.Exceptions;
+using System.Net;
 namespace AltoHttp
 {
     /// <summary>
@@ -73,6 +74,26 @@ namespace AltoHttp
             state = Status.None;
             aop = AsyncOperationManager.CreateOperation(null);
             new GlobalSettings();
+        }
+        /// <summary>
+        /// Creates an istance for downloader
+        /// </summary>
+        /// <param name="url">The remote file source url</param>
+        /// <param name="fullpath">The save path to save the downloaded file</param>
+        /// <param name="headers">Header-value collection to set into web request to download the file properly</param>
+        public HttpDownloader(string url, string fullpath, WebHeaderCollection headers) : this(url, fullpath)
+        {
+            this.HeaderCollection = headers;
+            BeforeSendingRequest += HttpDownloader_BeforeSendingRequest;
+        }
+
+        void HttpDownloader_BeforeSendingRequest(object sender, BeforeSendingRequestEventArgs e)
+        {
+            if (HeaderCollection != null)
+            {
+                var httpRequest = (HttpWebRequest)e.Request;
+                httpRequest.SetHeadersProperly(HeaderCollection);
+            }
         }
         /// <summary>
         /// Gets the response headers
@@ -188,7 +209,7 @@ namespace AltoHttp
         public void Pause()
         {
             allowDownload = false;
-            downloadThread.Abort();
+            downloadThread.Interrupt();
         }
         /// <summary>
         /// Stops the download, deletes the downloaded file and resets the download
@@ -345,6 +366,9 @@ namespace AltoHttp
         /// Gets the last calculated md5 hash string
         /// </summary>
         public string LastMD5Checksum { get; set; }
-
+        /// <summary>
+        /// Gets the header-value collection for remote file
+        /// </summary>
+        public WebHeaderCollection HeaderCollection { get; private set; }
     }
 }

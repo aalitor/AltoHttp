@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using AltoHttp;
 using AltoHttp.Exceptions;
 using System.Net;
+using AltoHttp.NativeMessages;
+using System.Reflection;
 
 namespace DemoApplication
 {
@@ -14,7 +16,7 @@ namespace DemoApplication
         {
             InitializeComponent();
 
-            btnStart.Click+=btnStart_Click;
+            btnStart.Click += btnStart_Click;
             btnPuaseOrResume.Click += btnPuaseOrResume_Click;
             this.Load += AltoHttpDemoForm_Load;
         }
@@ -44,7 +46,7 @@ namespace DemoApplication
 
         void btnPuaseOrResume_Click(object sender, EventArgs e)
         {
-            if(btnPuaseOrResume.Text == "Pause")
+            if (btnPuaseOrResume.Text == "Pause")
                 downloader.Pause();
             else
                 downloader.Resume();
@@ -73,11 +75,11 @@ namespace DemoApplication
 
         void downloader_BeforeSendingRequest(object sender, BeforeSendingRequestEventArgs e)
         {
-           if(Program.MSG != null)
-           {
-               var request = (HttpWebRequest)e.Request;
-               request.SetHeaders(Program.MSG.Headers);
-           }
+            if (Program.MSG != null)
+            {
+                var request = (HttpWebRequest)e.Request;
+                request.SetHeaders(Program.MSG.Headers);
+            }
         }
 
         void downloader_ErrorOccured(object sender, ErrorEventArgs e)
@@ -132,6 +134,33 @@ namespace DemoApplication
             else if (e.Status == Status.Paused)
             {
                 btnPuaseOrResume.Text = "Resume";
+            }
+        }
+
+        private void btnChromeIntegration_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AltoHttp.BrowserIntegration.Chrome.AllInOneIntegrator.TryAddIntegration(Directory.GetCurrentDirectory(),
+                    Assembly.GetExecutingAssembly().Location);
+                MessageBox.Show("Integration added succesfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnRemoveIntegration_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AltoHttp.BrowserIntegration.Chrome.AllInOneIntegrator.TryRemoveIntegration();
+                MessageBox.Show("Integration removed succesfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }
