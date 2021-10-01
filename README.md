@@ -41,6 +41,23 @@ myQueue.Pause();
 myQueue.ResumeAsync();
 </code></pre>
 
+Chrome integration
+<pre><code>
+private void btnChromeIntegration_Click(object sender, EventArgs e)
+{
+    try
+    {
+        AltoHttp.BrowserIntegration.Chrome.AllInOneIntegrator.TryAddIntegration(Directory.GetCurrentDirectory(),
+            Assembly.GetExecutingAssembly().Location);
+        MessageBox.Show("Integration added succesfully!");
+    }
+    catch (Exception ex)
+    {
+        MessageBox.Show(ex.Message);
+    }
+}
+</code></pre>
+
 <h1>New Features:</h1>
 •	Ability to edit Http request and response with events
 
@@ -59,8 +76,14 @@ myQueue.ResumeAsync();
 
 • DemoApplication changed and improved
 
+<h1>New Features on 02.10.2021, Version 1.5.2</h1>
+•	Chrome browser integration provider methods have been added.Integration is done with just one line of code
+
+• DemoApplication changed and improved
+
+
 
 <h3>Demo Application</h3>
-<img src="https://i.imgur.com/7rytDU2.png" />
+<img src="https://i.imgur.com/3h5s00b.png" />
 
 
