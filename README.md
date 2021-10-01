@@ -19,31 +19,26 @@ This simple library provides downloading over Http. It supports Pause and Resume
 <h2>#Usage</h2>
 Downloading is so simple
 <pre>
-<code>
-HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
+<code>HttpDownloader downloader = new HttpDownloader(targetUrl,targetPath);
 downloader.Start(); 
 //PAUSE
 downloader.Pause();
 //RESUME
-downloader.Resume(); //downloader.Resume(filePathToResume) resumes from the existing file
-</code>
+downloader.Resume(); //downloader.Resume(filePathToResume) resumes from the existing file</code>
 </pre>
 
 Queue using
-<pre><code>
-DownloadQueue myQueue = new DownloadQueue();
+<pre><code>DownloadQueue myQueue = new DownloadQueue();
 myQueue.Add(targetUrl1,targetPath1);
 myQueue.Add(targetUrl2,targetPath2);
 myQueue.StartAsync();
 //PAUSE
 myQueue.Pause();
 //RESUME
-myQueue.ResumeAsync();
-</code></pre>
+myQueue.ResumeAsync();</code></pre>
 
 Chrome integration
-<pre><code>
-private void btnChromeIntegration_Click(object sender, EventArgs e)
+<pre><code>private void btnChromeIntegration_Click(object sender, EventArgs e)
 {
     try
     {
@@ -55,8 +50,7 @@ private void btnChromeIntegration_Click(object sender, EventArgs e)
     {
         MessageBox.Show(ex.Message);
     }
-}
-</code></pre>
+}</code></pre>
 
 <h1>New Features:</h1>
 •	Ability to edit Http request and response with events
