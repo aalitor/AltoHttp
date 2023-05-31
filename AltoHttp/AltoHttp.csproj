@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AltoHttp</RootNamespace>
     <AssemblyName>AltoHttp</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkProfile />
   </PropertyGroup>

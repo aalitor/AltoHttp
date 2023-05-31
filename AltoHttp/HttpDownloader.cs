@@ -208,8 +208,11 @@ namespace AltoHttp
         /// </summary>
         public void Pause()
         {
-            allowDownload = false;
-            downloadThread.Interrupt();
+            if (State != Status.Paused && State == Status.Downloading)
+            {
+                allowDownload = false;
+                downloadThread.Interrupt();
+            }
         }
         /// <summary>
         /// Stops the download, deletes the downloaded file and resets the download
@@ -232,23 +235,25 @@ namespace AltoHttp
         /// <param name="fileToResume">The filepath to continue</param>
         public void Resume(string fileToResume, string validationChecksum)
         {
-            LastMD5Checksum = validationChecksum;
-            if (State != Status.Paused && State != Status.ErrorOccured)
-                throw new Exception("Resume is enabled only when not downloading");
-            var file = new FileInfo(fileToResume);
-            TotalBytesReceived = file.Length;
-            if (fileToResume != FullFileName)
-                File.Move(fileToResume, FullFileName);
-            Start();
+            if (State == Status.Paused)
+            {
+                LastMD5Checksum = validationChecksum;
+                if (State != Status.Paused && State != Status.ErrorOccured)
+                    throw new Exception("Resume is enabled only when not downloading");
+                var file = new FileInfo(fileToResume);
+                TotalBytesReceived = file.Length;
+                if (fileToResume != FullFileName)
+                    File.Move(fileToResume, FullFileName);
+                Start();
+            }
         }
         /// <summary>
         /// Continues from where the file left
         /// </summary>
         public void Resume()
         {
-            if (State != Status.Paused && State != Status.ErrorOccured)
-                throw new Exception("Resume is enabled only when not downloading");
-            Start();
+            if (State == Status.Paused)
+                Start();
         }
         /// <summary>
         /// Gets the total bytes downloaded
